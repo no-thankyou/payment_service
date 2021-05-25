@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres:12-alpine
+    env_file:
+      - .env
+
+  redis:
+    image: redis:latest
+
+  api:
+    build: .
+    command: uvicorn api.app:app --reload --host 0.0.0.0 --port 8000 --reload-dir api/ --reload-dir common/ --reload-dir worker/
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    links:
+      - db
+      - redis
+    env_file:
+      - .env
+
+  worker:
+    build: .
+    command: celery -A worker.tasks worker --loglevel=INFO
+    volumes:
+      - .:/app
+    links:
+      - db
+      - redis
+    env_file:
+      - .env
