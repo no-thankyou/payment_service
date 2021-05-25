@@ -111,8 +111,6 @@ class Card(BaseModel):
     is_default = Column(Boolean)
     orders = relationship('Order', back_populates='card')
 
-    # TODO добавлять поля
-
 
 class Address(BaseModel):
     """Класс Адреса доставки пользователя."""
@@ -129,7 +127,6 @@ class Address(BaseModel):
     is_default = Column(Boolean)
     comment = Column(String)
     orders = relationship('Order', back_populates='address')
-    # phone TODO возможно стоит указывать номер тут
 
 
 class Shop(BaseModel):
@@ -139,7 +136,6 @@ class Shop(BaseModel):
 
     id = Column(Integer, primary_key=True, index=True)  # noqa: A003
     name = Column(String)
-    # logo TODO реализовать самим или найти готовое решение под алхимию?
     site_url = Column(String)
     api_endpoint = Column(String)
     api_key = Column(String)

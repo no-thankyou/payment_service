@@ -41,7 +41,6 @@ def create_card(card_data: schemas.CardCreate,
     """
     Создание карты.
 
-    TODO: исследовать подключение банка.
     :param card_data: данные для валидации созданной карты
     :param db: связь с БД
     :param user: связь с пользователем

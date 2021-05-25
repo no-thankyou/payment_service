@@ -2,7 +2,6 @@
 import sqltap
 from fastapi import Depends, FastAPI
 from fastapi_jwt_auth import AuthJWT
-from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 
 from api.handlers import (address, auth, cards, order, shop, user,
@@ -19,18 +18,7 @@ tags_metadata = [{'name': 'orders',
                   'description': 'Запросы для работы с профилем'},
                  {'name': 'auth', 'description': 'Запросы для авторизации'}]
 
-origins = ['http://127.0.0.1:3001',
-           'http://127.0.0.1:3000',
-           'http://127.0.0.1:8000',
-           'http://127.0.0.1:8001']
-
 app = FastAPI(openapi_tags=tags_metadata, debug=True)
-
-cors_regex = r'.*-justpay.wpp.zone|.*-justpay.wppdev.ru'
-app.add_middleware(CORSMiddleware, allow_origins=origins,
-                   allow_credentials=True, allow_methods=['*'],
-                   allow_headers=['*'],
-                   allow_origin_regex=cors_regex)
 
 app.include_router(order.router, prefix='/api/v1/orders',
                    tags=['orders'])

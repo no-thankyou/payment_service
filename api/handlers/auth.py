@@ -108,7 +108,6 @@ def send_sms(data: SendSmsForm):
         code = 100000 + secrets.randbelow(899999)
 
     phone_service.set_phone_code(str(code))
-    # TODO добавить отправку кода
     return JSONResponse({}, status_code=status.HTTP_200_OK)
 
 
@@ -116,9 +115,6 @@ def __remove_cookie(jwt_service: AuthJWT, response: Response, cookie_key: str,
                     cookie_path: str, http_only: bool = True):
     """
     Вспомогательная функция нормального удаления куков из ответа.
-
-    Проблема в том, что Response.delete_cookie неправильно выставляет samesite,
-    httponly и прочие флаги в set-cookies.
 
     :param jwt_service: сервис от библиотеки JWT, оттуда нужны настройки
     :param response: объект ответа, где нужно удалить куки

@@ -12,46 +12,6 @@ app = Celery('tasks', broker=REDIS_URL, backend=REDIS_URL)
 
 
 @app.task
-def add(x, y):
-    """Пример."""
-    return x + y
-
-
-@app.task
-def get_users_list(skip, limit):
-    """Пример работы с бд из очереди."""
-    return []
-
-
-@app.task
-def check_card(user_id, card_id):
-    """Валидация карты при добавлении."""
-    pass
-
-
-@app.task
-def hold_money(order_id, user_id, card_id):
-    """
-    Замораживает средства на карте для последующей оплаты.
-
-    При невозможности заморозить средства должна отправляться ошибка юзеру.
-    """
-    pass
-
-
-@app.task
-def free_money(order_id, user_id, card_id):
-    """Снять холд с карты."""
-    pass
-
-
-@app.task
-def withdrawal_money(order_id, user_id, card_id):
-    """Снять средства в счет оплаты заказа."""
-    pass
-
-
-@app.task
 def create_order(data):
     """
     Задача создания заказа.
@@ -77,7 +37,6 @@ def create_order(data):
                     shop_id=order.shop_id)
         db.get_or_create(Item, **item)
     process_order.apply_async((order.id,), countdown=settings.process_timeout)
-    # TODO переделать под работу с фронтом
 
 
 @app.task
@@ -88,7 +47,6 @@ def update_order(order_id, data):
     order.address_id = data['address_id']
     order.card_id = data['card_id']
     db.save()
-    # TODO поправить работу с БД
 
 
 @app.task

@@ -20,7 +20,6 @@ def get_profile(user=Depends(get_user)):  # noqa: B008
 
     :return:
     """
-    # todo переделать ответ без перегона из json в dict и обратно
     return JSONResponse(json.loads(schemas.User.from_orm(user).json()),
                         status_code=status.HTTP_200_OK)
 
@@ -39,6 +38,5 @@ def update_profile(data: schemas.UpdateUser,
     user.update(data)
     db.save()
     db.refresh(user)
-    # todo переделать ответ без перегона из json в dict и обратно
     return JSONResponse(json.loads(schemas.User.from_orm(user).json()),
                         status_code=status.HTTP_200_OK)
