@@ -8,6 +8,7 @@ flake8 = "*"
 pytest = "*"
 pytest-cov = "*"
 sqltap = "*"
+sqlalchemy = "*"
 
 [packages]
 uvicorn = "*"
