@@ -1,5 +1,5 @@
 # Бекенд MVP версии платежного шлюза
-![Build Status](https://github.com/no-thankyou/payment_service/actions/workflows/github-actions.yml/badge.svg?branch=main)
+![Build Status](https://github.com/no-thankyou/payment_service/actions/workflows/github-actions.yml/badge.svg?branch=master)
 
 ### Запуск
 ```bash
