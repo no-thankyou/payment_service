@@ -4,20 +4,27 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+flake8 = "*"
 pytest = "*"
 pytest-cov = "*"
 sqltap = "*"
 
 [packages]
-fastapi = {extras = ["all"], version = "*"}
 uvicorn = "*"
 celery = "*"
 redis = "*"
 sqlalchemy = "*"
 alembic = "*"
 psycopg2-binary = "*"
-fastapi-jwt-auth = {extras = ["asymmetric"], version = "*"}
 user-agents = "*"
 
 [requires]
 python_version = "3.8"
+
+[packages.fastapi]
+extras = [ "all",]
+version = "*"
+
+[packages.fastapi-jwt-auth]
+extras = [ "asymmetric",]
+version = "*"
