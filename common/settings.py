@@ -37,6 +37,10 @@ class Settings(BaseSettings):
     process_timeout: int = 300
     geo_data_by_ip = 'https://geolocation-db.com/json/{ip}&position=true'
 
+    class Config:
+        env_file = '.env.example'
+        env_file_encoding = 'utf-8'
+
 
 @AuthJWT.load_config
 def get_config():
